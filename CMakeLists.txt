@@ -28,12 +28,15 @@ target_link_libraries(ipc_mechanism PUBLIC
     ucm ucp ucs uct
 )
 
+# Add protobuf target
+add_subdirectory(proto)
+
 # Add daemon executable
 add_executable(ipcd src/daemon.cpp)
 target_include_directories(ipcd PUBLIC include)
-target_link_libraries(ipcd PRIVATE ipc_mechanism)
+target_link_libraries(ipcd PRIVATE ipc_mechanism protolib)
 
 # Add client executable
 add_executable(ipc-cli src/client.cpp)
 target_include_directories(ipc-cli PUBLIC include)
-target_link_libraries(ipc-cli PRIVATE ipc_mechanism)
+target_link_libraries(ipc-cli PRIVATE ipc_mechanism protolib)
